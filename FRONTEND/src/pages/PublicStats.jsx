@@ -9,7 +9,7 @@ const PublicStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/stats/dynamic');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/stats/dynamic`);
         setStats(res.data);
       } catch (err) {
         console.error('Failed to fetch stats', err);

@@ -16,13 +16,19 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./pages/Register";
 import AdminApprovalPage from "./pages/AdminApprovalPage";
 import ScrollToTop from "./components/ScrollToTop";
+import Loader from "./components/Loader";
 
 const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   const { user, isAuthenticated, loading } = useAuth();
 
-  if (loading) return <div className="p-6 text-center">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Loader />
+      </div>
+    );
 
   return (
     <Routes>

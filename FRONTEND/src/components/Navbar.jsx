@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Menu, X, Leaf, LogOut, LogIn } from "lucide-react";
+import AdminApprovalPage from "../pages/AdminApprovalPage";
 
 const Navbar = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -59,6 +60,15 @@ const Navbar = () => {
                 Dashboard
               </Link>
             )}
+            {isAuthenticated && user?.role === "admin" && (
+              <Link
+                to="/admin/approvals"
+                className="text-white hover:text-green-100 transition-colors font-medium"
+              >
+                Approvals
+              </Link>
+            )}
+
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 <button
@@ -131,6 +141,16 @@ const Navbar = () => {
                   Dashboard
                 </Link>
               )}
+              {isAuthenticated && user?.role === "admin" && (
+                <Link
+                  to="/admin/approvals"
+                  className="block px-3 py-2 text-white hover:text-green-100 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Approvals
+                </Link>
+              )}
+
               {isAuthenticated ? (
                 <div className="px-3 py-2">
                   <p className="text-green-100 mb-2">

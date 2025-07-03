@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { LogIn, Leaf, Eye, EyeOff } from 'lucide-react';
-import { toast } from 'sonner';
-import Loader from '../components/Loader';
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { LogIn, Leaf, Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
+import Loader from "../components/Loader";
+import axios from "axios";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -17,17 +18,17 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
 
   const validateForm = () => {
     const newErrors = {};
     if (!username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = "Username is required";
     }
     if (!password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -41,16 +42,35 @@ const Login = () => {
     try {
       const success = await login(username, password);
       if (success) {
-        toast.success('Login successful! Welcome back.');
-        navigate('/dashboard');
+        toast.success("Login successful! Welcome back.");
+        navigate("/dashboard");
       } else {
-        toast.error('Invalid username or password. Please try again.');
-        setErrors({ password: 'Invalid credentials' });
+        toast.error("Invalid username or password. Please try again.");
+        setErrors({ password: "Invalid credentials" });
       }
     } catch (error) {
-      toast.error('An error occurred during login. Please try again.');
+      toast.error("An error occurred during login. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!username.trim()) {
+      toast.error("Please enter your username first.");
+      return;
+    }
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/forgot-password`, {
+        username,
+      });
+      toast.success("Password reset request sent to admin.");
+    } catch (error) {
+      console.error(error);
+      const msg =
+        error.response?.data?.message ||
+        "Error sending request. Please try again.";
+      toast.error(msg);
     }
   };
 
@@ -63,7 +83,9 @@ const Login = () => {
               <Leaf className="h-12 w-12 text-green-600" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Worker Login</h2>
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+            Worker Login
+          </h2>
           <p className="mt-2 text-sm text-gray-600">
             Sign in to access your waste management dashboard
           </p>
@@ -72,7 +94,10 @@ const Login = () => {
         <div className="bg-white py-8 px-6 shadow-lg rounded-lg">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Username
               </label>
               <input
@@ -81,10 +106,11 @@ const Login = () => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
-                  if (errors.username) setErrors((prev) => ({ ...prev, username: undefined }));
+                  if (errors.username)
+                    setErrors((prev) => ({ ...prev, username: undefined }));
                 }}
                 className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                  errors.username ? 'border-red-500' : 'border-gray-300'
+                  errors.username ? "border-red-500" : "border-gray-300"
                 }`}
                 placeholder="Enter your username"
                 required
@@ -95,20 +121,24 @@ const Login = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Password
               </label>
               <div className="relative">
                 <input
                   id="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
+                    if (errors.password)
+                      setErrors((prev) => ({ ...prev, password: undefined }));
                   }}
                   className={`w-full px-3 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                    errors.password ? 'border-red-500' : 'border-gray-300'
+                    errors.password ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter your password"
                   required
@@ -144,11 +174,22 @@ const Login = () => {
                 </>
               )}
             </button>
+            <div className="text-center mt-4">
+              <button
+                onClick={handleForgotPassword}
+                className="text-green-600 hover:text-green-500 font-medium"
+              >
+                Forgot Password?
+              </button>
+            </div>
           </form>
         </div>
 
         <div className="text-center">
-          <Link to="/" className="text-green-600 hover:text-green-500 font-medium">
+          <Link
+            to="/"
+            className="text-green-600 hover:text-green-500 font-medium"
+          >
             ← Back to Home
           </Link>
         </div>

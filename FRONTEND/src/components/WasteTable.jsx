@@ -12,7 +12,7 @@ import {
 import { toast } from "sonner";
 import EditModal from "./Edit";
 
-const WasteTable = ({ entries, onDeleteEntry, fetchEntries }) => {
+const WasteTable = ({ entries, onDeleteEntry, fetchEntries, allowDelete }) => {
   const [sortField, setSortField] = useState("date");
   const [sortDirection, setSortDirection] = useState("desc");
   const [filterLocation, setFilterLocation] = useState("");
@@ -270,13 +270,15 @@ const WasteTable = ({ entries, onDeleteEntry, fetchEntries }) => {
                     >
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button
-                      onClick={() => handleDelete(entry._id, entry.location)}
-                      className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
-                      title="Delete entry"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
+                    {allowDelete && (
+                      <button
+                        onClick={() => handleDelete(entry._id, entry.location)}
+                        className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
+                        title="Delete entry"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>

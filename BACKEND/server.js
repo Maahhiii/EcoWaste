@@ -6,6 +6,7 @@ import wasteRoutes from "./routes/waste.js";
 import authRoutes from "./routes/auth.js";
 import chatRoutes from "./routes/chat.js";
 import statsRoutes from "./routes/stats.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config();
 connectDB();
@@ -23,6 +24,7 @@ app.use("/api/waste", wasteRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api", chatRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

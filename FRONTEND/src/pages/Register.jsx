@@ -36,6 +36,7 @@ const Register = () => {
 
     setIsLoading(true);
     try {
+      const wantsVolunteer = role === "volunteer";
       const success = await register(username, password, role);
       if (success) {
         toast.success("Registration successful! You are now logged in.");

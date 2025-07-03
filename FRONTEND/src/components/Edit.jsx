@@ -5,24 +5,22 @@ import { useAuth } from "../context/AuthContext";
 
 const EditModal = ({ entry, onClose, fetchEntries }) => {
   const { user } = useAuth();
-  const [editLocation, setEditLocation] = useState("");
-  const [editWeight, setEditWeight] = useState("");
-  const [editCategory, setEditCategory] = useState("");
+  const [editLocation, setEditLocation] = useState(entry.location);
+  const [editWeight, setEditWeight] = useState(entry.weight);
+  const [editCategory, setEditCategory] = useState(entry.category);
 
   useEffect(() => {
-    if (entry) {
-      setEditLocation(entry.location);
-      setEditWeight(entry.weight);
-      setEditCategory(entry.category);
-    }
-  }, [entry]);
+    // Disable body scroll
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   const handleSave = async () => {
     try {
       const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
+        headers: { Authorization: `Bearer ${user.token}` },
       };
 
       await axios.put(
@@ -39,21 +37,20 @@ const EditModal = ({ entry, onClose, fetchEntries }) => {
       fetchEntries();
       onClose();
     } catch (error) {
-      console.error(error);
       toast.error("Failed to update entry");
     }
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg space-y-4 w-full max-w-sm">
-        <h2 className="text-xl font-bold">Edit Waste Entry</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-[8px] bg-opacity-20 px-4">
+      <div className="bg-green-100 w-full max-w-xl h-auto p-8 rounded-lg shadow-lg space-y-4 max-h-[90vh] overflow-y-auto border-2 border-green-600">
+        <h2 className="text-2xl font-bold">Edit Waste Entry</h2>
 
         <input
           type="text"
           value={editLocation}
           onChange={(e) => setEditLocation(e.target.value)}
-          className="w-full px-3 py-2 border rounded"
+          className="w-full px-3 py-2 border rounded bg-white"
           placeholder="Location"
         />
 
@@ -61,14 +58,14 @@ const EditModal = ({ entry, onClose, fetchEntries }) => {
           type="number"
           value={editWeight}
           onChange={(e) => setEditWeight(e.target.value)}
-          className="w-full px-3 py-2 border rounded"
+          className="w-full px-3 py-2 border rounded bg-white"
           placeholder="Weight (kg)"
         />
 
         <select
           value={editCategory}
           onChange={(e) => setEditCategory(e.target.value)}
-          className="w-full px-3 py-2 border rounded"
+          className="w-full px-3 py-2 border rounded bg-white"
         >
           <option value="Plastic">Plastic</option>
           <option value="Organic">Organic</option>
@@ -81,10 +78,7 @@ const EditModal = ({ entry, onClose, fetchEntries }) => {
         </select>
 
         <div className="flex justify-end space-x-2">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-200 rounded"
-          >
+          <button onClick={onClose} className="px-4 py-2 bg-gray-200 rounded">
             Cancel
           </button>
           <button

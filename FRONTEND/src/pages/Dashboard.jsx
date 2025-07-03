@@ -142,21 +142,31 @@ const Dashboard = () => {
             note={`${topCategory.weight.toFixed(1)} kg`}
           />
         </div>
-
         {/* Form + Table */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-          <div className="xl:col-span-1">
-            <WasteForm onAddEntry={handleAddEntry} />
-          </div>
-          <div className="xl:col-span-2">
+          {/* Show form for volunteer, admin, manager */}
+          {["volunteer", "admin", "manager"].includes(user?.role) && (
+            <div className="xl:col-span-1">
+              <WasteForm onAddEntry={handleAddEntry} />
+            </div>
+          )}
+
+          {/* Waste Table */}
+          <div
+            className={`${
+              user?.role === "user"
+                ? "xl:col-span-3 mx-auto max-w-7xl w-full" // Span all 3 columns and center
+                : "xl:col-span-2" // Span 2 columns when form is present
+            }`}
+          >
             <WasteTable
               entries={entries}
               onDeleteEntry={handleDeleteEntry}
               fetchEntries={fetchEntries}
+              allowDelete={["admin", "manager"].includes(user?.role)}
             />
           </div>
         </div>
-
         {/* Tips Section */}
         <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">
@@ -165,18 +175,22 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>
               <p>
-                <strong>Accurate Weight:</strong> Use calibrated scales for precise measurements
+                <strong>Accurate Weight:</strong> Use calibrated scales for
+                precise measurements
               </p>
               <p>
-                <strong>Location Details:</strong> Include specific landmarks for easy identification
+                <strong>Location Details:</strong> Include specific landmarks
+                for easy identification
               </p>
             </div>
             <div>
               <p>
-                <strong>Category Guidelines:</strong> When unsure, choose the other material type
+                <strong>Category Guidelines:</strong> When unsure, choose the
+                other material type
               </p>
               <p>
-                <strong>Regular Updates:</strong> Log entries immediately after collection for accuracy
+                <strong>Regular Updates:</strong> Log entries immediately after
+                collection for accuracy
               </p>
             </div>
           </div>

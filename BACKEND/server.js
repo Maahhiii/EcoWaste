@@ -43,7 +43,7 @@ app.get('/api/test', (req, res) => {
 });
 
 // Serve static files from the React app build directory
-const distPath = path.join(__dirname, 'dist');
+const distPath = path.join(__dirname, 'build');
 
 // Always serve static files if dist folder exists
 app.use(express.static(distPath));

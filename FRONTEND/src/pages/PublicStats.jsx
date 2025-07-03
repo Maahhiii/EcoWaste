@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import ChartSection from "../components/ChartSection";
-import { BarChart3, PieChart, TrendingUp, Users } from "lucide-react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import ChartSection from '../components/ChartSection';
+import { BarChart3, PieChart, TrendingUp, Users } from 'lucide-react';
+import axios from 'axios';
 
 const PublicStats = () => {
   const [stats, setStats] = useState(null);
@@ -9,15 +9,16 @@ const PublicStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("/api/stats/dynamic"); // Direct relative URL
+        const res = await axios.get('http://localhost:5000/api/stats/dynamic');
         setStats(res.data);
       } catch (err) {
-        console.error("Failed to fetch stats", err);
+        console.error('Failed to fetch stats', err);
       }
     };
 
     fetchStats();
   }, []);
+
   if (!stats) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -31,13 +32,10 @@ const PublicStats = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Waste Management Statistics
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Waste Management Statistics</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Transparent data showing our environmental impact and community
-            engagement. Together, we're building a cleaner, more sustainable
-            future.
+            Transparent data showing our environmental impact and community engagement.
+            Together, we're building a cleaner, more sustainable future.
           </p>
         </div>
       </div>
@@ -45,6 +43,7 @@ const PublicStats = () => {
       {/* Key Metrics */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
           <StatCard
             icon={<TrendingUp className="h-8 w-8 text-green-500" />}
             title="Monthly Growth"
@@ -76,6 +75,7 @@ const PublicStats = () => {
             description="Families served"
             color="orange"
           />
+
         </div>
 
         {/* Charts & Stats Section */}
@@ -88,14 +88,10 @@ const PublicStats = () => {
 
         {/* Additional Info */}
         <div className="mt-12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            About Our Data
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">About Our Data</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-3">
-                Data Collection Methods
-              </h3>
+              <h3 className="text-lg font-semibold mb-3">Data Collection Methods</h3>
               <ul className="space-y-2 text-gray-600">
                 <li>• Real-time weight measurements at collection points</li>
                 <li>• GPS tracking of collection vehicles</li>
@@ -120,9 +116,7 @@ const PublicStats = () => {
 };
 
 const StatCard = ({ icon, title, value, description, color }) => (
-  <div
-    className={`bg-white p-6 rounded-lg shadow-md border-l-4 border-${color}-500`}
-  >
+  <div className={`bg-white p-6 rounded-lg shadow-md border-l-4 border-${color}-500`}>
     <div className="flex items-center">
       <div className="flex-shrink-0">{icon}</div>
       <div className="ml-4">

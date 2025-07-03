@@ -10,7 +10,6 @@ import chatRoutes from "./routes/chat.js";
 import statsRoutes from "./routes/stats.js";
 import userRoutes from "./routes/user.js";
 
-// Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -19,30 +18,23 @@ connectDB();
 
 const app = express();
 
-// CORS configuration - now allowing the same domain since we're serving everything from backend
+// CORS - allow requests from your local frontend (adjust port if needed)
 app.use(
   cors({
-    origin: true, // Allow same origin
+    origin: "http://localhost:5173", 
     credentials: true,
   })
 );
 
 app.use(express.json());
 
-// Serve static files from React build (after you copy the build folder here)
-app.use(express.static(path.join(__dirname, 'build')));
-
 // API Routes
 app.use("/api/waste", wasteRoutes);
 app.use("/api/auth", authRoutes);
-// app.use("/api", chatRoutes);
+app.use("/api", chatRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/users", userRoutes);
 
-// Serve React app for all other routes (this should be LAST)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 const PORT = process.env.PORT || 5000;
 

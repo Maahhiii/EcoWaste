@@ -9,9 +9,7 @@ const PublicStats = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/stats/dynamic`
-        );
+        const res = await axios.get("/api/stats/dynamic"); // Direct relative URL
         setStats(res.data);
       } catch (err) {
         console.error("Failed to fetch stats", err);
@@ -19,8 +17,7 @@ const PublicStats = () => {
     };
 
     fetchStats();
-  }, [import.meta.env.VITE_API_URL]);
-
+  }, []);
   if (!stats) {
     return (
       <div className="min-h-screen flex items-center justify-center">

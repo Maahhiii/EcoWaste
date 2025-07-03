@@ -20,6 +20,14 @@ const PublicStats = () => {
     fetchStats();
   }, []);
 
+  if (!stats) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 // API Routes
 app.use("/api/waste", wasteRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api", chatRoutes);
+// app.use("/api", chatRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/users", userRoutes);
 

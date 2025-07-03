@@ -14,7 +14,7 @@ connectDB();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend's address
+    origin: "frontend-production-d274.up.railway.app", // your frontend's address
     credentials: true,
   })
 );

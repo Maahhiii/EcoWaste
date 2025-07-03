@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ChartSection from '../components/ChartSection';
 import { BarChart3, PieChart, TrendingUp, Users } from 'lucide-react';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 const PublicStats = () => {
   const [stats, setStats] = useState(null);
@@ -21,8 +22,8 @@ const PublicStats = () => {
 
   if (!stats) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        Loading...
+      <div className="flex justify-center items-center h-64">
+        <Loader />
       </div>
     );
   }

@@ -17,10 +17,14 @@ import Register from "./pages/Register";
 import AdminApprovalPage from "./pages/AdminApprovalPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Loader from "./components/Loader";
+import usePageTracking from "./UsePageTracking";
 
 const queryClient = new QueryClient();
 
 const AppRoutes = () => {
+
+  usePageTracking();
+  
   const { user, isAuthenticated, loading } = useAuth();
 
   if (loading)

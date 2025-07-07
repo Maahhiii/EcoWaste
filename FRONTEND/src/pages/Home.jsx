@@ -89,13 +89,15 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/stats"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 focus:outline focus:ring-2 focus:ring-green-400 transition-colors"
+                aria-label="View Our Impact"
               >
                 {content[language].viewImpact}
               </Link>
               <Link
                 to="/register"
-                className="bg-green-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-900 transition-colors"
+                className="bg-green-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-900 focus:outline focus:ring-2 focus:ring-green-400 transition-colors"
+                aria-label="Join Our Team"
               >
                 {content[language].joinTeam}
               </Link>
@@ -119,7 +121,7 @@ const Home = () => {
             {/* Card 1 */}
             <div className="group text-center p-6 bg-white rounded-lg shadow-[0_4px_6px_-1px_rgba(22,163,74,0.5)] hover:shadow-[0_6px_12px_-2px_rgba(22,163,74,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="h-8 w-8 text-green-600" />
+                <Leaf className="h-8 w-8 text-green-600" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
                 {content[language].card1Title}
@@ -130,7 +132,7 @@ const Home = () => {
             {/* Card 2 */}
             <div className="group text-center p-6 bg-white rounded-lg shadow-[0_4px_6px_-1px_rgba(37,99,235,0.5)] hover:shadow-[0_6px_12px_-2px_rgba(37,99,235,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-blue-600" />
+                <Users className="h-8 w-8 text-blue-600" aria-hidden="true" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                 {content[language].card2Title}
@@ -141,7 +143,10 @@ const Home = () => {
             {/* Card 3 */}
             <div className="group text-center p-6 bg-white rounded-lg shadow-[0_4px_6px_-1px_rgba(147,51,234,0.5)] hover:shadow-[0_6px_12px_-2px_rgba(147,51,234,0.6)] hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-purple-600" />
+                <Target
+                  className="h-8 w-8 text-purple-600"
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                 {content[language].card3Title}
@@ -195,9 +200,10 @@ const Home = () => {
           <div className="text-center mt-8">
             <Link
               to="/stats"
-              className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 focus:outline focus:ring-2 focus:ring-green-400 transition-colors"
+              aria-label="View Detailed Statistics"
             >
-              <Heart className="h-5 w-5 mr-2" />
+              <Heart className="h-5 w-5 mr-2" aria-hidden="true" />
               {content[language].detailedStats}
             </Link>
           </div>
@@ -215,7 +221,8 @@ const Home = () => {
           </p>
           <Link
             to="/register"
-            className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors inline-block"
+            className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 focus:outline focus:ring-2 focus:ring-green-400 transition-colors inline-block"
+            aria-label="Get Started"
           >
             {content[language].getStarted}
           </Link>

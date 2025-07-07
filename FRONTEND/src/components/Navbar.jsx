@@ -3,9 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Menu, X, Leaf, LogOut, LogIn } from "lucide-react";
 import AdminApprovalPage from "../pages/AdminApprovalPage";
+import { useContext } from "react";
+import { LanguageContext } from "../context/LanguageContext";
 
 const Navbar = () => {
   const { isAuthenticated, logout, user } = useAuth();
+  const { language, toggleLanguage } = useContext(LanguageContext);
+
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -95,6 +99,12 @@ const Navbar = () => {
                   <LogIn className="h-4 w-4" />
                   <span>Register</span>
                 </Link>
+                <button
+                  onClick={toggleLanguage}
+                  className="flex items-center space-x-1 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  {language === "en" ? "हिंदी में देखें" : "View in English"}
+                </button>
               </>
             )}
           </div>
@@ -176,6 +186,16 @@ const Navbar = () => {
                   </div>
                 </Link>
               )}
+
+              <button
+                onClick={() => {
+                  toggleLanguage();
+                  closeMobileMenu();
+                }}
+                className="block w-full text-left px-3 py-2 bg-green-800 hover:bg-green-900 text-white rounded-lg transition-colors"
+              >
+                {language === "en" ? "हिंदी में देखें" : "View in English"}
+              </button>
             </div>
           </div>
         )}

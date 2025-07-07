@@ -1,15 +1,78 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, Users, Target, Heart } from "lucide-react";
 import Chatbot from "../components/Chatbot";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { LanguageContext } from "../context/LanguageContext";
 
 const Home = () => {
+  const { language } = useContext(LanguageContext);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.3,
   });
+
+  const content = {
+    en: {
+      heroTitle: "Building a Cleaner Future",
+      heroDesc:
+        "Join EcoWaste NGO in our mission to transform waste management and create sustainable communities through innovation and collaboration.",
+      viewImpact: "View Our Impact",
+      joinTeam: "Join Our Team",
+      missionTitle: "Our Mission",
+      missionDesc:
+        "We're committed to revolutionizing waste management through technology, community engagement, and sustainable practices.",
+      card1Title: "Environmental Protection",
+      card1Desc:
+        "Reducing environmental impact through efficient waste collection and recycling programs.",
+      card2Title: "Community Engagement",
+      card2Desc:
+        "Building partnerships with local communities to promote sustainable waste management practices.",
+      card3Title: "Innovation & Technology",
+      card3Desc:
+        "Leveraging cutting-edge technology to optimize waste collection routes and processes.",
+      impactTitle: "Our Impact",
+      tons: "Tons Collected",
+      communities: "Communities Served",
+      recycling: "Recycling Rate",
+      volunteers: "Volunteers",
+      detailedStats: "View Detailed Statistics",
+      ctaTitle: "Ready to Make a Difference?",
+      ctaDesc:
+        "Join our team of dedicated workers and help us build a cleaner, more sustainable future for everyone.",
+      getStarted: "Get Started Today",
+    },
+    hi: {
+      heroTitle: "स्वच्छ भविष्य का निर्माण",
+      heroDesc:
+        "EcoWaste NGO के साथ जुड़ें और हमारे मिशन में सहयोग करें ताकि कचरा प्रबंधन में सुधार हो और टिकाऊ समुदाय बनाए जा सकें।",
+      viewImpact: "हमारे प्रयास देखें",
+      joinTeam: "हमारी टीम से जुड़ें",
+      missionTitle: "हमारा मिशन",
+      missionDesc:
+        "हम प्रौद्योगिकी, सामुदायिक सहभागिता और टिकाऊ प्रथाओं के माध्यम से कचरा प्रबंधन में क्रांति लाने के लिए प्रतिबद्ध हैं।",
+      card1Title: "पर्यावरण संरक्षण",
+      card1Desc:
+        "प्रभावी कचरा संग्रह और पुनर्चक्रण कार्यक्रमों के माध्यम से पर्यावरणीय प्रभाव को कम करना।",
+      card2Title: "सामुदायिक सहभागिता",
+      card2Desc:
+        "स्थानीय समुदायों के साथ साझेदारी करके टिकाऊ कचरा प्रबंधन को बढ़ावा देना।",
+      card3Title: "नवाचार और तकनीक",
+      card3Desc:
+        "कचरा संग्रह मार्गों और प्रक्रियाओं को अनुकूलित करने के लिए अत्याधुनिक तकनीक का उपयोग।",
+      impactTitle: "हमारा प्रभाव",
+      tons: "संग्रहित टन",
+      communities: "सेवा प्राप्त समुदाय",
+      recycling: "पुनर्चक्रण दर",
+      volunteers: "स्वयंसेवक",
+      detailedStats: "विस्तृत आंकड़े देखें",
+      ctaTitle: "बदलाव लाने के लिए तैयार हैं?",
+      ctaDesc:
+        "हमारी समर्पित टीम में शामिल हों और सभी के लिए एक स्वच्छ, टिकाऊ भविष्य बनाएं।",
+      getStarted: "आज ही शुरुआत करें",
+    },
+  };
 
   return (
     <div className="min-h-screen">
@@ -18,25 +81,23 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Building a Cleaner Future
+              {content[language].heroTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-green-100 max-w-3xl mx-auto">
-              Join EcoWaste NGO in our mission to transform waste management and
-              create sustainable communities through innovation and
-              collaboration.
+              {content[language].heroDesc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/stats"
                 className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
               >
-                View Our Impact
+                {content[language].viewImpact}
               </Link>
               <Link
                 to="/register"
                 className="bg-green-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-900 transition-colors"
               >
-                Join Our Team
+                {content[language].joinTeam}
               </Link>
             </div>
           </div>
@@ -47,11 +108,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Mission
+              {content[language].missionTitle}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're committed to revolutionizing waste management through
-              technology, community engagement, and sustainable practices.
+              {content[language].missionDesc}
             </p>
           </div>
 
@@ -62,12 +122,9 @@ const Home = () => {
                 <Leaf className="h-8 w-8 text-green-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                Environmental Protection
+                {content[language].card1Title}
               </h3>
-              <p className="text-gray-600">
-                Reducing environmental impact through efficient waste collection
-                and recycling programs.
-              </p>
+              <p className="text-gray-600">{content[language].card1Desc}</p>
             </div>
 
             {/* Card 2 */}
@@ -76,12 +133,9 @@ const Home = () => {
                 <Users className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                Community Engagement
+                {content[language].card2Title}
               </h3>
-              <p className="text-gray-600">
-                Building partnerships with local communities to promote
-                sustainable waste management practices.
-              </p>
+              <p className="text-gray-600">{content[language].card2Desc}</p>
             </div>
 
             {/* Card 3 */}
@@ -90,12 +144,9 @@ const Home = () => {
                 <Target className="h-8 w-8 text-purple-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-                Innovation & Technology
+                {content[language].card3Title}
               </h3>
-              <p className="text-gray-600">
-                Leveraging cutting-edge technology to optimize waste collection
-                routes and processes.
-              </p>
+              <p className="text-gray-600">{content[language].card3Desc}</p>
             </div>
           </div>
         </div>
@@ -106,7 +157,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Impact
+              {content[language].impactTitle}
             </h2>
           </div>
 
@@ -115,25 +166,29 @@ const Home = () => {
               <div className="text-4xl font-bold text-green-600 mb-2">
                 {inView && <CountUp end={2500} duration={2} separator="," />}+
               </div>
-              <div className="text-gray-600">Tons Collected</div>
+              <div className="text-gray-600">{content[language].tons}</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">
                 {inView && <CountUp end={150} duration={2} separator="," />}+
               </div>
-              <div className="text-gray-600">Communities Served</div>
+              <div className="text-gray-600">
+                {content[language].communities}
+              </div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-purple-600 mb-2">
                 {inView && <CountUp end={75} duration={2} />}%
               </div>
-              <div className="text-gray-600">Recycling Rate</div>
+              <div className="text-gray-600">{content[language].recycling}</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-orange-600 mb-2">
                 {inView && <CountUp end={500} duration={2} separator="," />}+
               </div>
-              <div className="text-gray-600">Volunteers</div>
+              <div className="text-gray-600">
+                {content[language].volunteers}
+              </div>
             </div>
           </div>
 
@@ -143,7 +198,7 @@ const Home = () => {
               className="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
             >
               <Heart className="h-5 w-5 mr-2" />
-              View Detailed Statistics
+              {content[language].detailedStats}
             </Link>
           </div>
         </div>
@@ -153,17 +208,16 @@ const Home = () => {
       <section className="py-16 bg-green-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Make a Difference?
+            {content[language].ctaTitle}
           </h2>
           <p className="text-xl mb-8 text-green-100 max-w-2xl mx-auto">
-            Join our team of dedicated workers and help us build a cleaner, more
-            sustainable future for everyone.
+            {content[language].ctaDesc}
           </p>
           <Link
             to="/register"
             className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors inline-block"
           >
-            Get Started Today
+            {content[language].getStarted}
           </Link>
         </div>
       </section>

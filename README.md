@@ -1,6 +1,8 @@
-# ♻️ EcoWaste - Waste Management Dashboard
+# ♻️ EcoWaste - Waste Manager
 
 EcoWaste is a full-stack MERN (MongoDB, Express, React, Node.js) web application for tracking, managing, and analyzing waste collection data. It enables organizations or communities to monitor waste collection activities, maintain records, and visualize environmental impact through intuitive dashboards.
+
+Here's the website: [**EcoWaste**](https://ecowaste.up.railway.app/)
 
 ---
 
@@ -23,4 +25,5 @@ EcoWaste is a full-stack MERN (MongoDB, Express, React, Node.js) web application
 - **Backend:** Node.js, Express.js, MongoDB
 - **Authentication:** JWT (JSON Web Tokens)
 - **Database:** MongoDB 
+
 

@@ -1,7 +1,7 @@
-
 # EcoWaste – Waste Management Platform
 
-**EcoWaste** is a full-stack MERN web application designed to help NGOs and communities track, manage, and analyze waste collection efforts. It offers an intuitive dashboard, multilingual support, and offline functionality to ensure usability even in low-connectivity areas. Here's a look: [EcoWaste](https://ecowaste.up.railway.app/)
+**EcoWaste** is a full-stack MERN web application designed to help NGOs and communities track, manage, and analyze waste collection efforts. It offers an intuitive dashboard, multilingual support, and offline functionality to ensure usability even in low-connectivity areas. 
+Here's a look: [EcoWaste](https://ecowaste.up.railway.app/)
 
 ---
 

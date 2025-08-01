@@ -71,7 +71,6 @@ const AdminApprovalPage = () => {
     }
   };
 
-  // Get counts for dashboard stats
   const pendingVolunteers = users.filter(u => u.volunteerRequestPending).length;
   const totalUsers = users.length;
   const usersByRole = users.reduce((acc, u) => {

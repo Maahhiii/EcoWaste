@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, Users, Target, Heart } from "lucide-react";
-import Chatbot from "../components/Chatbot";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { LanguageContext } from "../context/LanguageContext";
@@ -228,8 +227,6 @@ const Home = () => {
           </Link>
         </div>
       </section>
-
-      <Chatbot />
     </div>
   );
 };

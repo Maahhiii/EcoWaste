@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { LogIn, Leaf, Eye, EyeOff } from "lucide-react";
+import { LogIn, Leaf, Eye, EyeOff, Info } from "lucide-react";
 import { toast } from "sonner";
 import Loader from "../components/Loader";
 import axios from "axios";
@@ -183,6 +183,27 @@ const Login = () => {
               </button>
             </div>
           </form>
+        </div>
+
+        {/* Demo Credentials */}
+        <div className="bg-yellow-50 border border-yellow-300 text-yellow-800 text-sm rounded-md px-4 py-3">
+          <div className="flex items-start space-x-2">
+            <Info className="w-5 h-5 mt-0.5 text-yellow-500" />
+            <div>
+              <p className="font-semibold mb-1">Try with demo accounts:</p>
+              <ul className="space-y-1">
+                <li>
+                  <strong>Admin</strong>: <code>Admin / Admin123</code>
+                </li>
+                <li>
+                  <strong>Manager</strong>: <code>manager1 / manager</code>
+                </li>
+                <li>
+                  <strong>Volunteer</strong>: <code>worker1 / worker</code>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <div className="text-center">

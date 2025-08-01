@@ -9,7 +9,6 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [entries, setEntries] = useState([]);
 
-  // Fetch waste entries
   const fetchEntries = async () => {
     try {
       const config = {
@@ -31,7 +30,6 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  // Save to localStorage whenever entries change
   useEffect(() => {
     if (entries.length > 0) {
       localStorage.setItem("wasteEntries", JSON.stringify(entries));
@@ -68,7 +66,6 @@ const Dashboard = () => {
     }
   };
 
-  // Stats Calculations
   const totalWeight = entries.reduce((sum, entry) => sum + entry.weight, 0);
   const today = new Date().toLocaleDateString("en-GB");
   const todayEntries = entries.filter((entry) => entry.date === today);
@@ -155,8 +152,8 @@ const Dashboard = () => {
           <div
             className={`${
               user?.role === "user"
-                ? "xl:col-span-3 mx-auto max-w-7xl w-full" // Span all 3 columns and center
-                : "xl:col-span-2" // Span 2 columns when form is present
+                ? "xl:col-span-3 mx-auto max-w-7xl w-full" 
+                : "xl:col-span-2" 
             }`}
           >
             <WasteTable
@@ -164,6 +161,7 @@ const Dashboard = () => {
               onDeleteEntry={handleDeleteEntry}
               fetchEntries={fetchEntries}
               allowDelete={["admin", "manager"].includes(user?.role)}
+              allowEdit={["volunteer", "admin", "manager"].includes(user?.role)}
             />
           </div>
         </div>
@@ -200,7 +198,6 @@ const Dashboard = () => {
   );
 };
 
-// Reusable stat card component
 const StatCard = ({ title, value, icon, note }) => (
   <div className="bg-white p-6 rounded-lg shadow-md">
     <div className="flex items-center">

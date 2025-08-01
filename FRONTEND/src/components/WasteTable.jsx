@@ -12,7 +12,13 @@ import {
 import { toast } from "sonner";
 import EditModal from "./Edit";
 
-const WasteTable = ({ entries, onDeleteEntry, fetchEntries, allowDelete }) => {
+const WasteTable = ({
+  entries,
+  onDeleteEntry,
+  fetchEntries,
+  allowDelete,
+  allowEdit,
+}) => {
   const [sortField, setSortField] = useState("date");
   const [sortDirection, setSortDirection] = useState("desc");
   const [filterLocation, setFilterLocation] = useState("");
@@ -233,9 +239,11 @@ const WasteTable = ({ entries, onDeleteEntry, fetchEntries, allowDelete }) => {
                   <span>Category</span>
                 </div>
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {allowEdit && (
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
 
@@ -261,26 +269,32 @@ const WasteTable = ({ entries, onDeleteEntry, fetchEntries, allowDelete }) => {
                     {entry.category}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm font-medium">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => setEditingEntry(entry)}
-                      className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50"
-                      title="Edit entry"
-                    >
-                      <Edit className="h-4 w-4" />
-                    </button>
-                    {allowDelete && (
-                      <button
-                        onClick={() => handleDelete(entry._id, entry.location)}
-                        className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
-                        title="Delete entry"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    )}
-                  </div>
-                </td>
+                {allowEdit && (
+                  <td className="px-6 py-4 text-sm font-medium">
+                    <div className="flex space-x-2">
+                      {allowEdit && (
+                        <button
+                          onClick={() => setEditingEntry(entry)}
+                          className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50"
+                          title="Edit entry"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </button>
+                      )}
+                      {allowDelete && (
+                        <button
+                          onClick={() =>
+                            handleDelete(entry._id, entry.location)
+                          }
+                          className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
+                          title="Delete entry"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

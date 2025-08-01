@@ -3,13 +3,12 @@ import axios from "axios";
 
 const AuthContext = createContext(undefined);
 
-const EXPIRY_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+const EXPIRY_DURATION = 60 * 60 * 1000; 
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user from localStorage on mount and check expiry
   useEffect(() => {
     const storedData = localStorage.getItem("user");
     if (storedData) {
@@ -62,7 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, password, role) => {
     try {
-      const finalRole = role || "user"; // Default to "user" if role is undefined
+      const finalRole = role || "user"; 
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/register`,
